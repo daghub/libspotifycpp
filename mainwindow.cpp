@@ -15,10 +15,15 @@ QtSession::~QtSession()
 }
 
 
-void QtSession::notifyMainThread()
+void QtSession::notify_main_thread()
 {
   //  qApp->wakeUpGuiThread(); // needed?
-  QTimer::singleShot(0, this, SLOT(processEvents));
+  QTimer::singleShot(0, this, SLOT(processEvents()));
+}
+
+void QtSession::log_message(const char* data) const
+{
+  fprintf(stderr, "%s", data);
 }
 
 void QtSession::processEvents()

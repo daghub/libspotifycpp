@@ -20,6 +20,7 @@ session::session()
   config_.callbacks = &callbacks_;
   callbacks_.notify_main_thread = &cb_notify_main_thread;
   callbacks_.logged_in = &cb_logged_in;
+  callbacks_.log_message = &cb_log_message;
 
   CHK(sp_session_create(&config_, &session_));
   g_session_ = this;
@@ -42,11 +43,6 @@ int session::process_events()
   return next_timeout;
 }
 
-void session::notify_main_thread()
-{
-  // Implemented by the user
-}
-
 void SP_CALLCONV session::cb_logged_in(sp_session* session, sp_error err)
 {
   g_session_->logged_in(err);
@@ -56,6 +52,12 @@ void SP_CALLCONV session::cb_notify_main_thread(sp_session* session)
 {
   if (g_session_)
     g_session_->notify_main_thread();
+}
+
+void SP_CALLCONV session::cb_log_message(sp_session* session, const char* data)
+{
+  if (g_session_)
+    g_session_->log_message(data);
 }
 
 }

@@ -11,10 +11,15 @@ class QtSession : public QObject , public spotify::session
 public:
   QtSession();
   virtual ~QtSession();
-  
-  virtual void notifyMainThread();
-public slots:
+
+  public slots:
   void processEvents();
+
+private:
+  // Overrides
+  virtual void notify_main_thread();
+  virtual void log_message(const char* data) const;
+
 };
 
 class MainWindow : public QMainWindow

@@ -26,7 +26,8 @@ public:
   void login(const char* username, const char* password, bool remember_me, const char* blob) const;
   int process_events();
 
-  virtual void notify_main_thread();
+  virtual void notify_main_thread() {}
+  virtual void log_message(const char*) const {}
 
   sig::signal< void(sp_error) > logged_in;
 
@@ -34,6 +35,7 @@ private:
 
   static void SP_CALLCONV cb_logged_in(sp_session* session, sp_error err);
   static void SP_CALLCONV cb_notify_main_thread(sp_session* session);
+  static void SP_CALLCONV cb_log_message(sp_session* session, const char* data);
 
   sp_session_config config_;
   sp_session_callbacks callbacks_;
@@ -43,4 +45,5 @@ private:
 }
 
 #endif // SESSION_H
+
 
