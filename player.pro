@@ -1,5 +1,5 @@
-HEADERS = mainwindow.h session.h
-SOURCES = test.cpp mainwindow.cpp session.cpp appkey.cpp
+HEADERS = mainwindow.h session.h qtsession.h logindialog.h
+SOURCES = test.cpp mainwindow.cpp session.cpp appkey.cpp logindialog.cpp qtsession.cpp
 TARGET = player
 LIBS += -lspotify -L.
 
