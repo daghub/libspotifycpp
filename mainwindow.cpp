@@ -3,21 +3,25 @@
 #include <QDebug>
 #include <QApplication>
 #include <QTimer>
-#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QLineEdit>
 #include <QPushButton>
 
 
 MainWindow::MainWindow(QtSession* session) : session_(session)
 {
-  /*  try {
-    logged_in_connection_ = session_->logged_in.connect(
-        boost::bind(&MainWindow::loggedIn, this, _1));
-  } catch(spotify::error& err) {
-    qDebug() << boost::diagnostic_information(err).c_str();
-    return;
-    } */
-  //  QWidget* centralWidget = new QWidget;
-  //setCentralWidget(centralWidget);
+  QWidget* centralWidget = new QWidget;
+  searchEdit_ = new QLineEdit;
+  connect(searchEdit_, SIGNAL(returnPressed()), SLOT(searchClick()));
+  vLayout_ = new QVBoxLayout;
+  vLayout_->addWidget(searchEdit_);
+  centralWidget->setLayout(vLayout_);
+  setCentralWidget(centralWidget);
 }
+
+void MainWindow::searchClick()
+{
+  qDebug() << "Search!";
+}
+
 

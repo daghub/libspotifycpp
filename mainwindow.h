@@ -6,6 +6,8 @@
 #include "session.h"
 
 class QtSession;
+class QLineEdit;
+class QVBoxLayout;
 
 class MainWindow : public QMainWindow
 {
@@ -13,8 +15,13 @@ class MainWindow : public QMainWindow
 public:
   MainWindow(QtSession* session);
 
+public slots:
+  void searchClick();
+
 private:
   QtSession* session_;
+  QLineEdit* searchEdit_;
+  QVBoxLayout* vLayout_;
   //  spotify::sig::scoped_connection logged_in_connection_;
 
 };

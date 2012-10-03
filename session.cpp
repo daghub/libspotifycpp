@@ -1,5 +1,6 @@
 #include <memory.h>
 #include "session.h"
+#include "search.h"
 #include "appkey.h"
 
 namespace spotify {
@@ -28,12 +29,24 @@ session::session()
 
 session::~session()
 {
+  sp_session_release(session_);
   g_session_ = 0;
 }
 
 void session::login(const char* username, const char* password, bool remember_me, const char* blob) const
 {
   CHK(sp_session_login(session_, username, password, remember_me, blob));
+}
+
+boost::shared_ptr< search > session::create_search(const char* query, int track_offset, int track_count,
+                                                   int album_offset, int album_count, int artist_offset,
+                                                   int artist_count, int playlist_offset,
+                                                   int playlist_count, sp_search_type search_type)
+{
+  return boost::shared_ptr< search > (new search(session_, query, track_offset, track_count,
+                                                 album_offset, album_count, artist_offset,
+                                                 artist_count, playlist_offset,
+                                                 playlist_count,  search_type));
 }
 
 int session::process_events()
@@ -43,18 +56,18 @@ int session::process_events()
   return next_timeout;
 }
 
-void SP_CALLCONV session::cb_logged_in(sp_session* session, sp_error err)
+void SP_CALLCONV session::cb_logged_in(sp_session*, sp_error err)
 {
   g_session_->logged_in(err);
 }
 
-void SP_CALLCONV session::cb_notify_main_thread(sp_session* session)
+void SP_CALLCONV session::cb_notify_main_thread(sp_session*)
 {
   if (g_session_)
     g_session_->notify_main_thread();
 }
 
-void SP_CALLCONV session::cb_log_message(sp_session* session, const char* data)
+void SP_CALLCONV session::cb_log_message(sp_session*, const char* data)
 {
   if (g_session_)
     g_session_->log_message(data);
