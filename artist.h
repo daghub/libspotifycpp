@@ -9,7 +9,10 @@ class artist : boost::noncopyable
 {
 public:
   ~artist();
+
   const char* name() const;
+  bool is_loaded() const;
+  const byte* portrait(sp_image_size size);
 
 private:
   artist(sp_artist* artist);
