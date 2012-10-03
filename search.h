@@ -3,6 +3,7 @@
 
 #include <boost/utility.hpp>
 #include <boost/signals2.hpp>
+#include <vector>
 #include "session.h"
 
 class sp_search;
@@ -16,6 +17,7 @@ class search : boost::noncopyable
 public:
   ~search();
 
+  std::vector< artist_ptr > artists();
   sig::signal< void(void) > complete;
 
 private:
@@ -28,6 +30,7 @@ private:
   static void SP_CALLCONV cb_search_complete(sp_search* result, void *userdata);
 
   friend class session;
+
   sp_search* search_;
 };
 }

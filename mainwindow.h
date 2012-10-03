@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-//#include <boost/scoped_ptr.hpp>
-#include "session.h"
+#include "base.h"
+
 
 class QtSession;
 class QLineEdit;
@@ -17,12 +17,14 @@ public:
 
 public slots:
   void searchClick();
+  void searchComplete();
 
 private:
   QtSession* session_;
   QLineEdit* searchEdit_;
   QVBoxLayout* vLayout_;
-  //  spotify::sig::scoped_connection logged_in_connection_;
+  spotify::search_ptr search_;
+  spotify::sig::scoped_connection search_complete_connection_;
 
 };
 

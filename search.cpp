@@ -1,6 +1,7 @@
 #include "search.h"
+#include "artist.h"
 
-namespace spotify {
+NS_SPOTIFY_BEGIN
 
 search::search(sp_session* session, const char* query, int track_offset, int track_count,
          int album_offset, int album_count, int artist_offset,
@@ -19,6 +20,16 @@ search::~search()
   sp_search_release(search_);
 }
 
+std::vector< artist_ptr > search::artists()
+{
+  std::vector< artist_ptr > ret;
+  int n = sp_search_num_artists(search_);
+  for (int i = 0; i < n; ++i) {
+    ret.push_back(artist_ptr(new artist(sp_search_artist(search_, i))));
+  }
+  return ret;
+}
+
 void search::search_complete()
 {
   complete();
@@ -29,5 +40,5 @@ void SP_CALLCONV search::cb_search_complete(sp_search*, void *userdata)
   reinterpret_cast< search* >(userdata)->search_complete();
 }
 
-}
+NS_SPOTIFY_END
 
