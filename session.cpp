@@ -1,6 +1,7 @@
 #include <memory.h>
 #include "session.h"
 #include "search.h"
+#include "playlistcontainer.h"
 #include "appkey.h"
 
 namespace spotify {
@@ -38,12 +39,19 @@ void session::login(const char* username, const char* password, bool remember_me
   CHK(sp_session_login(session_, username, password, remember_me, blob));
 }
 
-boost::shared_ptr< search > session::create_search(const char* query, int track_offset, int track_count,
+playlistcontainer_ptr session::playlistcontainer() const
+{
+  return playlistcontainer_ptr(new spotify::playlistcontainer(
+      sp_session_playlistcontainer(session_))
+                               );
+}
+
+boost::shared_ptr< search > session::search(const char* query, int track_offset, int track_count,
                                                    int album_offset, int album_count, int artist_offset,
                                                    int artist_count, int playlist_offset,
                                                    int playlist_count, sp_search_type search_type)
 {
-  return boost::shared_ptr< search > (new search(session_, query, track_offset, track_count,
+  return search_ptr(new spotify::search(session_, query, track_offset, track_count,
                                                  album_offset, album_count, artist_offset,
                                                  artist_count, playlist_offset,
                                                  playlist_count,  search_type));

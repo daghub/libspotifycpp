@@ -17,17 +17,19 @@ typedef boost::error_info< struct tag_sp_error, sp_error > sp_error_info;
 typedef boost::error_info< struct tag_call, std::string > sp_call_info;
 
 #define CHK(x) \
-  { sp_error res = x; if (res != SP_ERROR_OK) BOOST_THROW_EXCEPTION(error() << sp_error_info(res) << sp_call_info(#x)); }
+  { sp_error res = x; if (res != SP_ERROR_OK) BOOST_THROW_EXCEPTION(::spotify::error() << sp_error_info(res) << sp_call_info(#x)); }
 #define CHK_NULL(x) \
-  { if (!(x)) BOOST_THROW_EXCEPTION(error() << sp_call_info(#x)); }
+  { if (!(x)) BOOST_THROW_EXCEPTION(::spotify::error() << sp_call_info(#x)); }
 
 namespace sig = boost::signals2;
 
 class search;
 class artist;
+class playlistcontainer;
 
 typedef boost::shared_ptr< search > search_ptr;
 typedef boost::shared_ptr< artist > artist_ptr;
+typedef boost::shared_ptr< playlistcontainer > playlistcontainer_ptr;
 
 NS_SPOTIFY_END
 

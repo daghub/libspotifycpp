@@ -20,7 +20,7 @@ search::~search()
   sp_search_release(search_);
 }
 
-std::vector< artist_ptr > search::artists()
+std::vector< artist_ptr > search::artists() const
 {
   std::vector< artist_ptr > ret;
   int n = sp_search_num_artists(search_);
@@ -28,6 +28,21 @@ std::vector< artist_ptr > search::artists()
     ret.push_back(artist_ptr(new artist(sp_search_artist(search_, i))));
   }
   return ret;
+}
+
+size_t search::total_artists() const
+{
+  return sp_search_total_albums(search_);
+}
+
+sp_error search::error() const
+{
+  return sp_search_error(search_);
+}
+
+bool search::is_loaded() const
+{
+  return sp_search_is_loaded(search_);
 }
 
 void search::search_complete()

@@ -1,23 +1,24 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
-#include <boost/utility.hpp>
-#include <boost/signals2.hpp>
 #include <vector>
-#include "session.h"
+#include "base.h"
 
 class sp_search;
 
-namespace spotify {
-
-namespace sig = boost::signals2;
+NS_SPOTIFY_BEGIN
 
 class search : boost::noncopyable
 {
 public:
   ~search();
 
-  std::vector< artist_ptr > artists();
+  std::vector< artist_ptr > artists() const;
+  size_t total_artists() const;
+
+  sp_error error() const;
+  bool is_loaded() const;
+
   sig::signal< void(void) > complete;
 
 private:
@@ -33,6 +34,7 @@ private:
 
   sp_search* search_;
 };
-}
+
+NS_SPOTIFY_END
 
 #endif

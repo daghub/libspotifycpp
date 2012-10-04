@@ -23,7 +23,7 @@ MainWindow::MainWindow(QtSession* session) : session_(session)
 void MainWindow::searchClick()
 {
   qDebug() << "Search!";
-  search_ = session_->create_search(
+  search_ = session_->search(
       searchEdit_->text().toUtf8().data(),
       0, 80, 0, 80, 0, 80, 0, 80, SP_SEARCH_STANDARD);
   search_complete_connection_ = search_->complete.connect(

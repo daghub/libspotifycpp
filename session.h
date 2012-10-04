@@ -13,7 +13,8 @@ public:
   virtual ~session();
 
   void login(const char* username, const char* password, bool remember_me, const char* blob) const;
-  search_ptr create_search(const char* query, int track_offset, int track_count,
+  playlistcontainer_ptr playlistcontainer() const;
+  search_ptr search(const char* query, int track_offset, int track_count,
                                             int album_offset, int album_count, int artist_offset,
                                             int artist_count, int playlist_offset,
                                             int playlist_count, sp_search_type search_type);
