@@ -26,10 +26,14 @@ namespace sig = boost::signals2;
 class search;
 class artist;
 class playlistcontainer;
+class playlist;
+class track;
 
 typedef boost::shared_ptr< search > search_ptr;
 typedef boost::shared_ptr< artist > artist_ptr;
 typedef boost::shared_ptr< playlistcontainer > playlistcontainer_ptr;
+typedef boost::shared_ptr< playlist > playlist_ptr;
+typedef boost::shared_ptr< track > track_ptr;
 
 NS_SPOTIFY_END
 

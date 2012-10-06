@@ -11,11 +11,21 @@ public:
   ~playlist();
 
   bool is_loaded() const;
+  std::vector< track_ptr > tracks() const;
 
-  //sig::signal< void(sp_playlist*, int position) > added;
-  //sig::signal< void(sp_playlist*, int position) > removed;
-  //sig::signal< void(sp_playlist*, int position, int new_position) > moved;
-  //sig::signal< void() > loaded;
+  sig::signal< void(sp_track* const* tracks, int num_tracks, int position) > tracks_added;
+  sig::signal< void(const int* tracks, int num_tracks) > tracks_removed;
+  sig::signal< void(const int* tracks, int num_tracks, int new_position) > tracks_moved;
+  sig::signal< void() > renamed;
+  sig::signal< void() > state_changed;
+  sig::signal< void(bool done) > update_in_progress;
+  sig::signal< void() > metadata_updated;
+  sig::signal< void(int position, sp_user *user, int when) > track_created_changed;
+  sig::signal< void(int position, bool seen) > track_seen_changed;
+  sig::signal< void(const char *desc) > description_changed;
+  sig::signal< void(const byte *image) > image_changed;
+  sig::signal< void(int position, const char *message) > track_message_changed;
+  sig::signal< void() > subscribers_changed;
 
 private:
   playlist(sp_playlist* pl);

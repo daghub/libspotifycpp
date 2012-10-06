@@ -11,6 +11,7 @@ public:
   ~playlistcontainer();
 
   bool is_loaded() const;
+  std::vector< playlist_ptr > playlists() const;
 
   sig::signal< void(sp_playlist*, int position) > added;
   sig::signal< void(sp_playlist*, int position) > removed;
