@@ -15,6 +15,10 @@ bool track::is_loaded() const {
   return sp_track_is_loaded(track_);
 }
 
+const char* track::name() const {
+  return sp_track_name(track_);
+}
+
 
 NS_SPOTIFY_END
 

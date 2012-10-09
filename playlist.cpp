@@ -35,6 +35,10 @@ bool playlist::is_loaded() const {
   return sp_playlist_is_loaded(pl_);
 }
 
+const char* playlist::name() const {
+  return sp_playlist_name(pl_);
+}
+
 std::vector< track_ptr > playlist::tracks() const {
   std::vector< track_ptr > ret;
   int n = sp_playlist_num_tracks(pl_);

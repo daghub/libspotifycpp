@@ -11,6 +11,7 @@ public:
   ~playlist();
 
   bool is_loaded() const;
+  const char* name() const;
   std::vector< track_ptr > tracks() const;
 
   sig::signal< void(sp_track* const* tracks, int num_tracks, int position) > tracks_added;

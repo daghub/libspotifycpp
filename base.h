@@ -23,6 +23,7 @@ typedef boost::error_info< struct tag_call, std::string > sp_call_info;
 
 namespace sig = boost::signals2;
 
+class session;
 class search;
 class artist;
 class playlistcontainer;

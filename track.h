@@ -11,6 +11,7 @@ public:
   ~track();
 
   bool is_loaded() const;
+  const char* name() const;
 
   /*sig::signal< void(sp_playlist*, int position) > added;
   sig::signal< void(sp_playlist*, int position) > removed;
