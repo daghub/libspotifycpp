@@ -10,12 +10,11 @@
 LoginDialog::LoginDialog(QtSession* session) : session_(session)
 {
   QLabel* logo = new QLabel;
-  logo->setPixmap(QPixmap("logo.png"));
+  logo->setPixmap(QPixmap(":/logo.png"));
   QLabel* text1 = new QLabel("Username");
   QLabel* text2 = new QLabel("Password");
   userName_ = new QLineEdit;
   password_ = new QLineEdit;
-  userName_->setText("User name");
   password_->setEchoMode(QLineEdit::Password);
   login_ = new QPushButton;
   login_->setText("Login");
@@ -35,7 +34,7 @@ LoginDialog::LoginDialog(QtSession* session) : session_(session)
 void LoginDialog::paintEvent(QPaintEvent *)
 {
   QPainter painter(this);
-  painter.drawImage(0, 0, QImage("background.png"));
+  painter.drawImage(0, 0, QImage(":/background.png"));
 }
 
 void LoginDialog::loginClick()
