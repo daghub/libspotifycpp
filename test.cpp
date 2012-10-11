@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QDialog>
+#include <QTextCodec>
 #include "mainwindow.h"
 #include "logindialog.h"
 #include "qtsession.h"
@@ -7,6 +8,7 @@
 
 int main(int argc, char* argv[])
 {
+  QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
   QApplication app(argc, argv);
   QtSession session;
   app.setOrganizationName("Spotify");

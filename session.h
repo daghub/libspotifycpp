@@ -19,6 +19,7 @@ public:
                                             int artist_count, int playlist_offset,
                                             int playlist_count, sp_search_type search_type);
 
+  std::string remembered_user() const;
   int process_events();
 
   virtual void notify_main_thread() {}

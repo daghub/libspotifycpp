@@ -6,6 +6,7 @@
 
 class QPushButton;
 class QLineEdit;
+class QCheckBox;
 class QtSession;
 
 class LoginDialog : public QDialog
@@ -29,6 +30,7 @@ private:
   QLineEdit* userName_;
   QLineEdit* password_;
   QPushButton* login_;
+  QCheckBox* rememberMe_;
 };
 
 #endif

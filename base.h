@@ -6,6 +6,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/exception/all.hpp>
 #include <libspotify/api.h>
+#include <string>
 
 #define NS_SPOTIFY_BEGIN namespace spotify {
 #define NS_SPOTIFY_END }

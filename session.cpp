@@ -34,9 +34,22 @@ session::~session()
   g_session_ = 0;
 }
 
-void session::login(const char* username, const char* password, bool remember_me, const char* blob) const
-{
+void session::login(const char* username, const char* password, bool remember_me, const char* blob) const {
   CHK(sp_session_login(session_, username, password, remember_me, blob));
+}
+
+std::string session::remembered_user() const {
+  std::string ret;
+  std::vector<char> buf;
+  size_t size = 20;
+  // Paranoid? Yes! Correct? Me thinks so.
+  do {
+    buf.resize(size + 1); // Allow space for terminating 0
+    size = (size_t) sp_session_remembered_user(session_, &buf[0], buf.size());
+  } while(size >= buf.size());
+  buf.resize(size); // Remove terminating 0 and any garbage
+  std::copy(buf.begin(), buf.end(), back_inserter(ret));
+  return ret;
 }
 
 playlistcontainer_ptr session::playlistcontainer() const
